@@ -37,7 +37,7 @@ public class MyCursor {
         y = 0;
 
 
-        init(x, y); // Set up the starting location and size
+        init(x-20, y+20); // Set up the starting location and size
     }
     
     //2nd constructor to initialize location and scale!

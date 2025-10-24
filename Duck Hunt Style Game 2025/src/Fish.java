@@ -13,7 +13,7 @@ public class Fish {
     private Image img;               // Stores the picture of the duck
     private Image normal;
     private Image dead;
-    private Tokage tokage = new Tokage("tokage_5.gif");
+    //private Tokage tokage = new Tokage("tokage_5.gif");
     private AffineTransform tx;      // Used to move (translate) and resize (scale) the image
 
     // Variables to control the size (scale) of the duck image
@@ -40,7 +40,7 @@ public class Fish {
     // Constructor: runs when you make a new Duck object
     public Fish() {
         normal = getImage("/imgs/fish.gif"); //Load the image 
-        dead = getImage("/imgs/dead_fish.gif"); //Load dead fish image
+        dead = getImage("/imgs/caught_fish_2.png"); //Load dead fish image
         
         img = normal;
         tx = AffineTransform.getTranslateInstance(0, 0); // Start with image at (0,0)
@@ -158,7 +158,7 @@ public class Fish {
         }
         g2.drawImage(img, tx, null);      // Actually draw the duck image
         
-        tokage2.paint(g);
+        //tokage2.paint(g);
         
         update();
         init(x,y);
@@ -224,11 +224,11 @@ public class Fish {
     		//change sprite to the alternate skin
     		img = dead;//fish is dead
     		
-    		
+    		/*
     		this.tokage.x = (int)x;
     		this.tokage.y = 820;
     		this.tokage.vy = -3;
-    		
+    		*/
     		return true;
     	}else {
     		//logic if not colliding

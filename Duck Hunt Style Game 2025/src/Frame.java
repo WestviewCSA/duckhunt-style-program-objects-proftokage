@@ -30,6 +30,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	 */
 	private Fish fishObject = new Fish();
 	private Tokage tokageObject = new Tokage();
+	private Tokage tokage2 = new Tokage();
 	private Background myBackground= new Background();
 	private MyCursor cursor = new MyCursor();
 	private Foreground myForeground = new Foreground();
@@ -52,6 +53,8 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		tokageObject.paint(pen);
 		
 		cursor.paint(pen);
+		
+		tokage2.paint(pen);
 		
 	}
 	

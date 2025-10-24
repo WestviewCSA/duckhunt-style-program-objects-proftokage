@@ -31,7 +31,7 @@ public class Tokage {
 
     // Constructor: runs when you make a new Duck object
     public Tokage() {
-        img = getImage("/imgs/tokage_5.gif"); // Load the image file
+        img = getImage("/imgs/tokage_normal_2.GIF"); // Load the image file
         
         tx = AffineTransform.getTranslateInstance(0, 0); // Start with image at (0,0)
         
