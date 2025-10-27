@@ -51,7 +51,8 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	}
 	
 	//FROM ONLINE!!!!!
-	public void playSound(String soundFileName) {
+	/*ORIGINAL!!!!!
+	 * public void playSound(String soundFileName) {
 		try {
 			//code looks inside sound folder (made new folder under imgs)
 			File soundFile = new File("sounds/"+soundFileName);
@@ -71,8 +72,9 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			e.printStackTrace();
 		}
 	}
+	*/
 	
-	
+	Music mouseClickSound = new Music("Water_Audio.wav", false);
 	@Override
 	public void mousePressed(MouseEvent mouse) {
 	    // Runs when a mouse button is pressed down.
@@ -86,7 +88,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		
 		if(checkCollision==true) {
 			tokageObject.changePicture("tokage_5.GIF");
-			playSound("Water_Audio.wav");
+			this.mouseClickSound.play();
 		}else {
 			tokageObject.changePicture("tokage_normal_3.png");
 			
@@ -174,6 +176,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		
 		//this line of code is to force redraw the entire frame
 		super.paintComponent(pen);
+		
 	 
 		//background should be drawn before the object
 		//or based on how you want to LAYER.
@@ -211,7 +214,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		
 			if(checkCollisionNumber>=8) {
 			myFishScore8.paint(pen);
-			playSound("Victory_music.wav");
+			//playSound("Victory_music.wav");
 			}
 		
 			if(checkCollisionNumber==9){
@@ -249,7 +252,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		
 		if(missedCatches>=3) {
 			myMissedCatches3.paint(pen);
-			playSound("Losing_music.wav");
+			//playSound("Losing_music.wav");
 		}
 		
 		if(missedCatches==4) {
@@ -257,10 +260,15 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			fishObject.setScore(0);
 		}
 		
+		pen.setColor(Color.WHITE);
+		pen.drawString("Level 1", 40, 60);
+		
 		tokageObject.paint(pen);
 		
 		cursor.paint(pen);
 		//tokage2.paint(pen);
+		
+		
 		
 	}
 	
