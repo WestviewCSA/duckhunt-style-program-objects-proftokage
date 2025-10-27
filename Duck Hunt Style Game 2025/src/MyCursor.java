@@ -31,8 +31,8 @@ public class MyCursor {
         tx = AffineTransform.getTranslateInstance(0, 0); // Start with image at (0,0)
         
         // Default values
-        scaleX = 1;
-        scaleY = 1;
+        scaleX = 1.2;
+        scaleY = 1.2;
         x = 0;
         y = 0;
 
@@ -68,14 +68,14 @@ public class MyCursor {
         init(x, y); // keep same location when changing image
     }
     
-   
     // Draws the duck on the screen
     public void paint(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;   // Graphics2D lets us draw images
         tx.scale(scaleX, scaleY);//<-- original down or up scale
         g2.drawImage(img, tx, null);      // Actually draw the duck image
         
-    	x = MouseInfo.getPointerInfo().getLocation().getX()-50;
+        /*ORIGINALLY -50 for both the getX and getY location*/
+    	x = MouseInfo.getPointerInfo().getLocation().getX()-25;
     	y = MouseInfo.getPointerInfo().getLocation().getY()-50;
 
         init(x,y);

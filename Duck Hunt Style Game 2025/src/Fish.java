@@ -6,13 +6,20 @@ import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.geom.AffineTransform;
 import java.net.URL;
+import javax.swing.JFrame;
 
 // The Duck class represents a picture of a duck that can be drawn on the screen.
 public class Fish {
     // Instance variables (data that belongs to each Duck object)
     private Image img;               // Stores the picture of the duck
+    
+    /*ORIGINAL!!!!!
     private Image normal;
     private Image dead;
+    */
+    
+    private Image dead;
+    
     //private Tokage tokage = new Tokage("tokage_5.gif");
     private AffineTransform tx;      // Used to move (translate) and resize (scale) the image
 
@@ -25,24 +32,35 @@ public class Fish {
     private double y;        
     
     //variables for speed
-    private int vx;
-    private int vy;
+    private double vx;
+    private double vy;
     
     //variables for random values
-    private int vxmin;
-    private int vxmax;
-    private int vymin;
-    private int vymax;
+    private double vxmin;
+    private double vxmax;
+    private double vymin;
+    private double vymax;
     
     //debugging variable
     public boolean debugging = true;
+    
+    //score variable
+    public int score = 0;
+    
+    //missed catches variable
+    public int missedCatches = 0;
 
     // Constructor: runs when you make a new Duck object
     public Fish() {
-        normal = getImage("/imgs/fish.gif"); //Load the image 
+        /*ORIGINAL!!!!!
+         * normal = getImage("/imgs/fish.gif"); //Load the image 
+         */
         dead = getImage("/imgs/caught_fish_2.png"); //Load dead fish image
         
-        img = normal;
+        /*ORIGINAL!!!!!
+         * img = normal;
+         */
+        img = getImage("/imgs/fish.gif");
         tx = AffineTransform.getTranslateInstance(0, 0); // Start with image at (0,0)
         
         // Default values
@@ -54,10 +72,18 @@ public class Fish {
         vy = 0;
         
         //Define the max and min velocities
-        vxmin = 5;
-        vxmax = 15;
+       
+        /* ORIGINAL!!!!!
+        vxmin = 5; 
+        vxmax = 15; 
         vymin = 1;
         vymax = 5;
+        */
+        
+        vxmin = 1; 
+        vxmax = 5; 
+        vymin = 1;
+        vymax = 3;
         
         //initialize the vx and vy variables with non-zero values
         vx  = vxmin + (int)(Math.random()*(vxmax-vxmin));
@@ -77,7 +103,7 @@ public class Fish {
     }
     
     //2nd constructor to initialize location and scale!
-    public Fish(int x, int y, int scaleX, int scaleY, int vx, int vy) {
+    public Fish(int x, int y, int scaleX, int scaleY, double vx, double vy) {
     	this();
     	this.x 		= x;
     	this.y 		= y;
@@ -88,9 +114,19 @@ public class Fish {
     	init(x,y);
     }
     
-    public void setVelocityVariables(int vx, int vy) {
-    	this.vx = vx;
-    	this.vy = vy;
+    public void setScore(int score) {
+    	this.score = score;
+    }
+    
+    public void setMissedCatches(int missedCatches) {
+    	this.missedCatches = missedCatches;
+    }
+    
+    public void setVelocityVariables(double vxmin, double vxmax, double vymin, double vymax) {
+    	this.vxmin = vxmin;
+    	this.vxmax = vxmax;
+    	this.vymin = vymin;
+    	this.vymax = vymax;
     }
     
     
@@ -105,7 +141,8 @@ public class Fish {
     	
     	//Modify the x velocity and values
     	x = x+vx;
-    	if(x>=1800||x<=0) {
+    	/*ORIGINAL!!!!!
+    	if(x>=1800)||x<=0) {
     		if(vx<0) {
     			vx  = vxmin + (int)(Math.random()*(vxmax-vxmin));
     		}else {
@@ -113,9 +150,19 @@ public class Fish {
     		}
     		
     	}
+    	*/
+    	
+    	if(x>=1800) {
+    		vx = -vxmin+(int)(Math.random()*(-vxmax+vxmin));
+    	}
+    	
+    	if(x<=0) {
+    		vx = vxmin+(int)(Math.random()*(vxmax-vxmin));
+    	}
+    	
     	
     	//Modify the y velocity and values
-    	y = y+vy;
+    	/*ORIGINAL!!!!!
     	if(y>=980||y<=0) {
     		if(vy<0) {
     			vy  = vymin + (int)(Math.random()*(vymax-vymin));
@@ -123,10 +170,21 @@ public class Fish {
     			vy = -vymin +(int)(Math.random()*(-vymax+vymin));
     		}
     	}
+    	*/
+    	y = y+vy;
+    	if(y>=980) {
+    		vy = -vymin+(int)(Math.random()*(-vymax+vymin));
+    	}
+    	
+    	if(y<=0) {
+    		vy = vymin+(int)(Math.random()*(vymax-vymin));
+    	}
     	
     	//respawn - if falling from the sky respawn at the bottom
     	
     	//Code for when fish falls
+    	
+    	/*ORIGINAL!!!!!
     	if(vx==0 && vy==20 && y>=900) {
     		vx = (int)(Math.random()*(8)+3);
     			
@@ -139,7 +197,18 @@ public class Fish {
     			
     		img = normal;
     		}
+    		*/
+    	
+    	if(vx==0 && vy==20 && y>=900) {
+    		vx = (int)(Math.random()*(2)+1);
+    		if(Math.random()<0.5) {
+    			vx*=-1;
+    		}
+    		vy = -(int)(Math.random()*1+1);
+    		
+    		img = getImage("/imgs/fish.gif");
     	}
+    }
     
     
     
@@ -163,12 +232,34 @@ public class Fish {
         update();
         init(x,y);
         
+        //Cover hits box with a rectangle
+        Color hitBlue = new Color(135,184,215);
+        g.setColor(hitBlue);
+        g.fillRect(1270, 60, 110, 40);
+        
         //create a green hitbox
         g.setColor(Color.red);
         g.drawOval((int)x+35, (int)y-25, 160, 160);
         
+        //create levels boxes
+        //level 1
+        Color level1 = new Color(240,237,201);
+        g.setColor(level1);
+        g.fillRect(0, 0, 100, 100);
+        
+        //level 2
+        Color level2 = new Color(200, 224, 197);
+        g.setColor(level2);
+        g.fillRect(100, 0, 100, 100);
+        
+        //level 3
+        Color level3 = new Color(94, 159, 171);
+        g.setColor(level3);
+        g.fillRect(200, 0, 100, 100);
+        
         
     }
+    
     
     // Setup method: places the duck at (a, b) and scales it
     private void init(double a, double b) {
@@ -204,13 +295,67 @@ public class Fish {
     
    
     //Collision and collision logic
-    public boolean checkCollision(int mX, int mY) {
+    
+    public int checkLevels(int mX, int mY) {
+    	Rectangle mouse = new Rectangle (mX, mY, 50,50);
     	
+    	Rectangle level1 = new Rectangle (0,0,100,100);
+    	
+    	Rectangle level2 = new Rectangle (100,0,100,100);
+    	
+    	Rectangle level3 = new Rectangle (200,0,100,100);
+    	
+    	if(mouse.intersects(level1)) {
+    		return 1;
+    	}else if (mouse.intersects(level2)) {
+    		return 2;
+    	}else if (mouse.intersects(level3)) {
+    		return 3;
+    	}else {
+    		return 0;
+    	}
+    }
+    
+    public boolean checkCollision(int mX, int mY) {
     	//represent mouse as rectangle
-    	Rectangle mouse = new Rectangle(mX, mY, 50, 50);
+    	Rectangle mouse = new Rectangle(mX, mY, 150, 150);
     	
     	//represent this object as a rectangle
-    	Rectangle fishRect = new Rectangle((int)x+25,(int)y+50,100,100);
+    	Rectangle fishRect = new Rectangle((int)x,(int)y,250,109);
+    	
+    	//use this built-in method for Rectangle to check if they intersect
+    	//aka Collision
+    	if(mouse.intersects(fishRect)) {
+    		return true;
+    	}else {
+    		return false;
+    	}
+    }
+    
+    public int checkmissedCatches(int mX, int mY) {
+    	//represent mouse as rectangle
+    	Rectangle mouse = new Rectangle(mX, mY, 150, 150);
+    	
+    	//represent this object as a rectangle
+    	Rectangle fishRect = new Rectangle((int)x,(int)y,250,109);
+    	
+    	//use this built-in method for Rectangle to check if they intersect
+    	//aka Collision
+    	if(mouse.intersects(fishRect)) {
+    		return missedCatches;
+    	}else {
+    		missedCatches = missedCatches+1;
+    		return missedCatches;
+    	}
+    }
+    
+    public int checkNumberCollision(int mX, int mY) {
+    	
+    	//represent mouse as rectangle
+    	Rectangle mouse = new Rectangle(mX, mY, 150, 150);
+    	
+    	//represent this object as a rectangle
+    	Rectangle fishRect = new Rectangle((int)x,(int)y,250,109);
     	
     	//use this built-in method for Rectangle to check if they intersect
     	//aka Collision
@@ -229,14 +374,12 @@ public class Fish {
     		this.tokage.y = 820;
     		this.tokage.vy = -3;
     		*/
-    		return true;
+    		score = score+1;
+    		return score;
     	}else {
-    		//logic if not colliding
-    		
-    		//change sprite to alternate skin (alive)
-    		img = normal;
-    		return false;
+    		return score;
     	}
+    	//ORIGINALLY had an else return -1;
     }
     
     

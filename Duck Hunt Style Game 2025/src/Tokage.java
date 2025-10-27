@@ -31,15 +31,21 @@ public class Tokage {
 
     // Constructor: runs when you make a new Duck object
     public Tokage() {
-        img = getImage("/imgs/tokage_normal_2.GIF"); // Load the image file
+        img = getImage("/imgs/tokage_normal_3.PNG"); // Load the image file
         
         tx = AffineTransform.getTranslateInstance(0, 0); // Start with image at (0,0)
         
         // Default values
-        scaleX = 1.0;
-        scaleY = 1.0;
+        scaleX = 0.5;
+        scaleY = 0.5;
+        
+        /*ORIGINAL
         x = 550;
         y = 795;
+        */
+        x = 400;
+        y = 0;
+        
         vx = 1;
         vy=0;
         

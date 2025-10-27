@@ -22,6 +22,7 @@ public class Background {
     //variables for speed
     private int vx;
     private int vy;
+    
 
     // Constructor: runs when you make a new Duck object
     public Background() {

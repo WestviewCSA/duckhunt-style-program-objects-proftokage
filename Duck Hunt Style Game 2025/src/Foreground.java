@@ -20,12 +20,12 @@ public class Foreground {
     private double y;        
     
     //variables for speed
-    private int vx;
-    private int vy;
+    private double vx;
+    private double vy;
 
     // Constructor: runs when you make a new Duck object
     public Foreground() {
-        img = getImage("/imgs/foreground_2.GIF"); // Load the image file
+        img = getImage("/imgs/foreground.PNG"); // Load the image file
         
         tx = AffineTransform.getTranslateInstance(0, 0); // Start with image at (0,0)
         
@@ -34,6 +34,8 @@ public class Foreground {
         scaleY = 1.0;
         x = 0;
         y = 0;
+        vx = 0.5;
+        vy = 0.5;
 
         init(x, y); // Set up the starting location and size
     }
