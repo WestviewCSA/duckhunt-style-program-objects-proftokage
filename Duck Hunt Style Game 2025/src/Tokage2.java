@@ -1,4 +1,4 @@
-/*
+
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -32,7 +32,7 @@ public class Tokage2 {
 
     // Constructor: runs when you make a new Duck object
     public Tokage2() {
-        img = getImage("/imgs/tokage_5.gif"); // Load the image file
+        img = getImage("/imgs/tokage_normal_3.PNG"); // Load the image file
         
         tx = AffineTransform.getTranslateInstance(0, 0); // Start with image at (0,0)
         
@@ -56,7 +56,7 @@ public class Tokage2 {
         vy = vymin + (int)(Math.random()*(vymax-vymin));
 
         init(x, y); // Set up the starting location and size
-    }
+    } 
     
     //2nd constructor to initialize location and scale!
     public Tokage2(int x, int y, int scaleX, int scaleY) {
@@ -159,4 +159,4 @@ public class Tokage2 {
     
     
 }
-*/
+

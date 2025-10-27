@@ -44,7 +44,7 @@ public class Tokage {
         y = 795;
         */
         x = 400;
-        y = 0;
+        y = 800;
         
         vx = 1;
         vy=0;

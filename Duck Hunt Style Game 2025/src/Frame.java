@@ -1,6 +1,7 @@
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
@@ -98,15 +99,15 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		int level = fishObject.checkLevels(mouse.getX()-25,mouse.getY()-50);
 		
 		if(level==0) {
-			fishObject.setVelocityVariables(0.5, 1, 0.5, 1);
+			fishObject.setVelocityVariables(1, 2, 1, 2);
 		}else if(level==1) {
-			fishObject.setVelocityVariables(0.5, 1, 0.5, 1);
+			fishObject.setVelocityVariables(2, 5, 2, 5);
 			fishObject.changePicture("fish.gif");
 		}else if (level==2) {
-			fishObject.setVelocityVariables(3, 4, 3, 4);
+			fishObject.setVelocityVariables(8, 12, 8, 12);
 			fishObject.changePicture("fish.gif");
 		}else if (level ==3) {
-			fishObject.setVelocityVariables(5, 7, 5, 7);
+			fishObject.setVelocityVariables(15, 20, 15, 20);
 			fishObject.changePicture("fish.gif");
 		}
 		
@@ -151,7 +152,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	 */
 	private Fish fishObject = new Fish();
 	private Tokage tokageObject = new Tokage();
-	//private Tokage tokage2 = new Tokage();
+	private Tokage tokage2 = new Tokage();
 	private Background myBackground= new Background();
 	private MyCursor cursor = new MyCursor();
 	private Foreground myForeground = new Foreground();
@@ -172,8 +173,6 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	private MissedCatches myMissedCatches2 = new MissedCatches(1305,65,0.5,0.5);
 	private MissedCatches myMissedCatches3 = new MissedCatches(1335,65,0.5,0.5);
 	
-	//Win or Lose screen
-	private Win_Lose_Screen screen1 = new Win_Lose_Screen()
 	
 	public void paint(Graphics pen) {
 		
@@ -241,8 +240,6 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		//for objects, you call methods on them using the dot operator
 		//methods use always involve parenthesis
 		
-		myForeground.paint(pen);
-		
 		
 		fishObject.paint(pen);
 		//Show the nets if there are any missed catches
@@ -264,13 +261,31 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			fishObject.setScore(0);
 		}
 		
+		Font f = new Font("Segoe UI", Font.PLAIN, 20);
+		pen.setFont(f);
+		pen.setColor(Color.BLACK);
+		//Level 1 box
+		pen.drawString("Level 1", 20, 60);
+		
+		//Level 2 box
+		pen.drawString("Level 2", 120, 60);
+		
+		//Level 3 box
+		pen.drawString("Level 3", 220, 60);
+		
+		//Score
+		Font f2 = new Font("Times New Roman", Font.PLAIN, 25);
+		pen.setFont(f2);
 		pen.setColor(Color.WHITE);
-		pen.drawString("Level 1", 40, 60);
+		pen.drawString("Number: "+checkCollisionNumber, 1275, 90);
 		
 		tokageObject.paint(pen);
+		tokage2.paint(pen);
 		
 		cursor.paint(pen);
-		//tokage2.paint(pen);
+		
+		myForeground.paint(pen);
+		
 		
 		
 		
@@ -310,8 +325,10 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		t.start();
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setVisible(true);
+		Music track1 = new Music("Track1.wav", true);
+		track1.play();
 		
-		Toolkit toolkit=Toolkit.getDefaultToolkit();
+	 	Toolkit toolkit=Toolkit.getDefaultToolkit();
 		Image image= toolkit.getImage("net.png");
 		
 		Cursor a = toolkit.createCustomCursor(image,new Point(this.getX(),this.getY()),"");
