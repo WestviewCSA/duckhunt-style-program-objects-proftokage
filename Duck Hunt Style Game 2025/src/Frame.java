@@ -172,6 +172,9 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	private MissedCatches myMissedCatches2 = new MissedCatches(1305,65,0.5,0.5);
 	private MissedCatches myMissedCatches3 = new MissedCatches(1335,65,0.5,0.5);
 	
+	//Win or Lose screen
+	private Win_Lose_Screen screen1 = new Win_Lose_Screen()
+	
 	public void paint(Graphics pen) {
 		
 		//this line of code is to force redraw the entire frame
@@ -219,6 +222,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		
 			if(checkCollisionNumber==9){
 			fishObject.setScore(0);
+			
 			}
 		
 			
