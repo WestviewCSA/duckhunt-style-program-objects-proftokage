@@ -99,16 +99,24 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		int level = fishObject.checkLevels(mouse.getX()-25,mouse.getY()-50);
 		
 		if(level==0) {
-			fishObject.setVelocityVariables(1, 2, 1, 2);
+			fishObject.setVelocityVariables(5, 10, 5, 10);
+			fishObject.setMissedCatches(0);
+			fishObject.setScore(0);
 		}else if(level==1) {
-			fishObject.setVelocityVariables(2, 5, 2, 5);
+			fishObject.setVelocityVariables(6, 11, 6, 11);
 			fishObject.changePicture("fish.gif");
+			fishObject.setMissedCatches(0);
+			fishObject.setScore(0);
 		}else if (level==2) {
-			fishObject.setVelocityVariables(8, 12, 8, 12);
+			fishObject.setVelocityVariables(18, 20, 18, 20);
 			fishObject.changePicture("fish.gif");
+			fishObject.setMissedCatches(0);
+			fishObject.setScore(0);
 		}else if (level ==3) {
-			fishObject.setVelocityVariables(15, 20, 15, 20);
+			fishObject.setVelocityVariables(28, 30, 28, 30);
 			fishObject.changePicture("fish.gif");
+			fishObject.setMissedCatches(0);
+			fishObject.setScore(0);
 		}
 		
 		
@@ -151,8 +159,8 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	 * Declare and instantiate (create) your objects here
 	 */
 	private Fish fishObject = new Fish();
-	private Tokage tokageObject = new Tokage();
-	private Tokage tokage2 = new Tokage();
+	public Tokage tokageObject = new Tokage();
+	
 	private Background myBackground= new Background();
 	private MyCursor cursor = new MyCursor();
 	private Foreground myForeground = new Foreground();
@@ -167,6 +175,9 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	private FishScore myFishScore6 = new FishScore(1745,85,0.7,0.7);
 	private FishScore myFishScore7 = new FishScore(1780,85,0.7,0.7);
 	private FishScore myFishScore8 = new FishScore(1815,85,0.7,0.7);
+	
+	//Win and lose
+	private Win myWin = new Win();
 	
 	//Fill missed catches box
 	private MissedCatches myMissedCatches1 = new MissedCatches(1275,65,0.5,0.5);
@@ -217,6 +228,12 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			if(checkCollisionNumber>=8) {
 			myFishScore8.paint(pen);
 			//playSound("Victory_music.wav");
+			myWin.changePicture("Win.GIF");
+			myWin.paint(pen);
+			Font f3 = new Font("Times New Roman", Font.PLAIN, 40);
+			pen.setFont(f3);
+			pen.setColor(Color.WHITE);
+			pen.drawString("If you want to play again, please click one of the levels",500,250);
 			}
 		
 			if(checkCollisionNumber==9){
@@ -254,6 +271,12 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		if(missedCatches>=3) {
 			myMissedCatches3.paint(pen);
 			//playSound("Losing_music.wav");
+			myWin.changePicture("Lose.GIF");
+			myWin.paint(pen);
+			Font f4 = new Font("Times New Roman", Font.PLAIN, 40);
+			pen.setFont(f4);
+			pen.setColor(Color.WHITE);
+			pen.drawString("If you want to play again, please click one of the levels",500,250);
 		}
 		
 		if(missedCatches==4) {
@@ -277,14 +300,24 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		Font f2 = new Font("Times New Roman", Font.PLAIN, 25);
 		pen.setFont(f2);
 		pen.setColor(Color.WHITE);
-		pen.drawString("Number: "+checkCollisionNumber, 1275, 90);
+		pen.drawString("Number: "+checkCollisionNumber, 1275, 20);
+		
+		if(fishObject.checkFall()==true) {
+			tokageObject.changePicture("blank.png");
+		}else {
+			tokageObject.changePicture("tokage_normal_3.PNG");
+		}
 		
 		tokageObject.paint(pen);
-		tokage2.paint(pen);
+		//tokage2.paint(pen);
 		
 		cursor.paint(pen);
 		
 		myForeground.paint(pen);
+		
+		
+		
+		
 		
 		
 		

@@ -19,8 +19,8 @@ public class Fish {
     */
     
     private Image dead;
+    private Tokage2 newTokage2 = new Tokage2("tokage_5.gif");
     
-    //private Tokage tokage = new Tokage("tokage_5.gif");
     private AffineTransform tx;      // Used to move (translate) and resize (scale) the image
 
     // Variables to control the size (scale) of the duck image
@@ -80,10 +80,10 @@ public class Fish {
         vymax = 5;
         */
         
-        vxmin = 1; 
-        vxmax = 5; 
-        vymin = 1;
-        vymax = 3;
+        vxmin = 5; 
+        vxmax = 10; 
+        vymin = 5;
+        vymax = 10;
         
         //initialize the vx and vy variables with non-zero values
         vx  = vxmin + (int)(Math.random()*(vxmax-vxmin));
@@ -180,6 +180,7 @@ public class Fish {
     		vy = vymin+(int)(Math.random()*(vymax-vymin));
     	}
     	
+    	
     	//respawn - if falling from the sky respawn at the bottom
     	
     	//Code for when fish falls
@@ -210,7 +211,13 @@ public class Fish {
     	}
     }
     
-    
+    public boolean checkFall() {
+    	if(vx==0 && vy==20 && y>=900) {
+    		return true;
+    	}else {
+    		return false;
+    	}
+	}
     
     
     // Draws the duck on the screen
@@ -257,6 +264,7 @@ public class Fish {
         g.setColor(level3);
         g.fillRect(200, 0, 100, 100);
         
+        newTokage2.paint(g);
         
     }
     
@@ -341,10 +349,14 @@ public class Fish {
     	
     	//use this built-in method for Rectangle to check if they intersect
     	//aka Collision
-    	if(mouse.intersects(fishRect)) {
+    	/*if(mouse.intersects(fishRect)) {
+    		return missedCatches;
+    	}
+    	*/
+    	if(!mouse.intersects(fishRect)&&checkLevels(mX,mY)==0) {
+    		missedCatches = missedCatches+1;
     		return missedCatches;
     	}else {
-    		missedCatches = missedCatches+1;
     		return missedCatches;
     	}
     }
@@ -369,11 +381,9 @@ public class Fish {
     		//change sprite to the alternate skin
     		img = dead;//fish is dead
     		
-    		/*
-    		this.tokage.x = (int)x;
-    		this.tokage.y = 820;
-    		this.tokage.vy = -3;
-    		*/
+    		newTokage2.setLocation(x, 300);
+    		newTokage2.setVelocityVariables(0, -3);
+    		
     		score = score+1;
     		return score;
     	}else {
