@@ -122,6 +122,16 @@ public class Tokage2 {
         Graphics2D g2 = (Graphics2D) g;   // Graphics2D lets us draw images
         g2.drawImage(img, tx, null);      // Actually draw the duck image
         update();
+        x+=vx;
+        y+=vy;
+        
+        init(x,y);
+        
+        if(y<=900) {
+        	vy=3;
+        }
+        
+        update();
         init(x,y);
     }
     

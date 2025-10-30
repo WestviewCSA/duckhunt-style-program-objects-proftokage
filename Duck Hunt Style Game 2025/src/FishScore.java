@@ -10,8 +10,8 @@ import java.net.URL;
 
 // The Duck class represents a picture of a duck that can be drawn on the screen.
 public class FishScore {
-    // Instance variables (data that belongs to each Duck object)
-    private Image img;               // Stores the picture of the duck
+    
+    private Image img;               // Stores the picture of the score
     private AffineTransform tx;      // Used to move (translate) and resize (scale) the image
 
     // Variables to control the size (scale) of the duck image
@@ -37,13 +37,6 @@ public class FishScore {
         y = 85;
         
         init(x,y);
-        /*ORIGINAL!!!!!
-        x = 1570;
-        y = 80;
-
-
-        init(x-20, y+20); // Set up the starting location and size
-        */
     }
     
     //2nd constructor to initialize location and scale!
@@ -66,16 +59,8 @@ public class FishScore {
     	init(x,y);
     }
 
-    
-    
-    // Changes the picture to a new image file
-    public void changePicture(String imageFileName) {
-        img = getImage("/imgs/"+imageFileName);
-        init(x, y); // keep same location when changing image
-    }
-    
-   
-    // Draws the duck on the screen
+ 
+    // Draws the score on the screen
     public void paint(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;   // Graphics2D lets us draw images
         tx.scale(scaleX, scaleY);//<-- original down or up scale
@@ -101,22 +86,6 @@ public class FishScore {
         }
         return tempImage;
     }
-
-    // NEW: Method to set scale
-    public void setScale(double sx, double sy) {
-        scaleX = sx;
-        scaleY = sy;
-        init(x, y);  // Keep current location
-    }
-
-    // NEW: Method to set location
-    public void setLocation(double newX, double newY) {
-        x = newX;
-        y = newY;
-        init(x, y);  // Keep current scale
-    }
-   
-    
     
     
 } //<--closing bracket for class dont delete- add above!

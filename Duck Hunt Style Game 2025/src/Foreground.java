@@ -18,10 +18,6 @@ public class Foreground {
     // Variables to control the location (x and y position) of the duck
     private double x;                
     private double y;        
-    
-    //variables for speed
-    private double vx;
-    private double vy;
 
     // Constructor: runs when you make a new Duck object
     public Foreground() {
@@ -34,8 +30,6 @@ public class Foreground {
         scaleY = 1.0;
         x = 0;
         y = 0;
-        vx = 0.5;
-        vy = 0.5;
 
         init(x, y); // Set up the starting location and size
     }
@@ -57,16 +51,8 @@ public class Foreground {
     	this.y 		= y;
     	this.scaleX = scaleX;
     	this.scaleY = scaleY;
-    	this.vx 	= vx; 
-    	this.vy 	= vy;
     	init(x,y);
     }
-    
-    public void setVelocityVariables(int vx, int vy) {
-    	this.vx = vx;
-    	this.vy = vy;
-    }
-    
     
     // Changes the picture to a new image file
     public void changePicture(String imageFileName) {
@@ -78,8 +64,6 @@ public class Foreground {
     public void update() {
     	
     }
-    
-    
     
     // Draws the duck on the screen
     public void paint(Graphics g) {
@@ -105,19 +89,5 @@ public class Foreground {
             e.printStackTrace();
         }
         return tempImage;
-    }
-
-    // NEW: Method to set scale
-    public void setScale(double sx, double sy) {
-        scaleX = sx;
-        scaleY = sy;
-        init(x, y);  // Keep current location
-    }
-
-    // NEW: Method to set location
-    public void setLocation(double newX, double newY) {
-        x = newX;
-        y = newY;
-        init(x, y);  // Keep current scale
     }
 }

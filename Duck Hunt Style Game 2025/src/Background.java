@@ -79,7 +79,6 @@ public class Background {
     }
     
     
-    
     // Draws the duck on the screen
     public void paint(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;   // Graphics2D lets us draw images
@@ -88,6 +87,7 @@ public class Background {
         init(x,y);
     }
     
+  
     // Setup method: places the duck at (a, b) and scales it
     private void init(double a, double b) {
         tx.setToTranslation(a, b);        // Move the image to position (a, b)

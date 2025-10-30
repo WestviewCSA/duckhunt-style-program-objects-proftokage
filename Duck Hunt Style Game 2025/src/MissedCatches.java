@@ -37,13 +37,6 @@ public class MissedCatches {
         y = 65;
         
         init(x,y);
-        /*ORIGINAL!!!!!
-        x = 1570;
-        y = 80;
-
-
-        init(x-20, y+20); // Set up the starting location and size
-        */
     }
     
     //2nd constructor to initialize location and scale!

@@ -62,7 +62,7 @@ public class Tokage {
 
         init(x, y); // Set up the starting location and size
     }
-    
+   
     //2nd constructor to initialize location and scale!
     public Tokage(int x, int y, int scaleX, int scaleY) {
     	this();
@@ -127,7 +127,15 @@ public class Tokage {
         Graphics2D g2 = (Graphics2D) g;   // Graphics2D lets us draw images
         g2.drawImage(img, tx, null);      // Actually draw the duck image
         update();
+        
+        x+=vx;
+        y+=vy;
+        
         init(x,y);
+        
+        if(y<=700) {
+        	vy=5;
+        }
     }
     
     // Setup method: places the duck at (a, b) and scales it

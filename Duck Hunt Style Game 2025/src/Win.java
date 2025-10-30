@@ -110,7 +110,25 @@ public class Win {
         init(x, y);  // Keep current scale
     }
    
-    
+    public boolean checkPlayAgain(int mX, int mY) {
+    	
+    	//represent mouse as rectangle
+    	Rectangle mouse = new Rectangle(mX, mY, 150, 150);
+    	
+    	//represent this object as a rectangle
+    	Rectangle winRect = new Rectangle((int)x,(int)y,500,175);
+    	
+    	//use this built-in method for Rectangle to check if they intersect
+    	//aka Collision
+
+    	if(mouse.intersects(winRect)) {
+    		//logic if colliding
+    		return true;
+    	}else {
+    		return false;
+    	}
+    	
+    }  
     
     
 } //<--closing bracket for class dont delete- add above!

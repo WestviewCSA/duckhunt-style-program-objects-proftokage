@@ -13,13 +13,8 @@ public class Fish {
     // Instance variables (data that belongs to each Duck object)
     private Image img;               // Stores the picture of the duck
     
-    /*ORIGINAL!!!!!
-    private Image normal;
     private Image dead;
-    */
-    
-    private Image dead;
-    private Tokage2 newTokage2 = new Tokage2("tokage_5.gif");
+    public Tokage2 newTokage2 = new Tokage2("tokage_5.gif");
     
     private AffineTransform tx;      // Used to move (translate) and resize (scale) the image
 
@@ -52,14 +47,7 @@ public class Fish {
 
     // Constructor: runs when you make a new Duck object
     public Fish() {
-        /*ORIGINAL!!!!!
-         * normal = getImage("/imgs/fish.gif"); //Load the image 
-         */
         dead = getImage("/imgs/caught_fish_2.png"); //Load dead fish image
-        
-        /*ORIGINAL!!!!!
-         * img = normal;
-         */
         img = getImage("/imgs/fish.gif");
         tx = AffineTransform.getTranslateInstance(0, 0); // Start with image at (0,0)
         
@@ -72,14 +60,6 @@ public class Fish {
         vy = 0;
         
         //Define the max and min velocities
-       
-        /* ORIGINAL!!!!!
-        vxmin = 5; 
-        vxmax = 15; 
-        vymin = 1;
-        vymax = 5;
-        */
-        
         vxmin = 5; 
         vxmax = 10; 
         vymin = 5;
@@ -141,17 +121,6 @@ public class Fish {
     	
     	//Modify the x velocity and values
     	x = x+vx;
-    	/*ORIGINAL!!!!!
-    	if(x>=1800)||x<=0) {
-    		if(vx<0) {
-    			vx  = vxmin + (int)(Math.random()*(vxmax-vxmin));
-    		}else {
-    			vx = -vxmin+(int)(Math.random()*(-vxmax+vxmin));
-    		}
-    		
-    	}
-    	*/
-    	
     	if(x>=1800) {
     		vx = -vxmin+(int)(Math.random()*(-vxmax+vxmin));
     	}
@@ -160,17 +129,7 @@ public class Fish {
     		vx = vxmin+(int)(Math.random()*(vxmax-vxmin));
     	}
     	
-    	
     	//Modify the y velocity and values
-    	/*ORIGINAL!!!!!
-    	if(y>=980||y<=0) {
-    		if(vy<0) {
-    			vy  = vymin + (int)(Math.random()*(vymax-vymin));
-    		}else {
-    			vy = -vymin +(int)(Math.random()*(-vymax+vymin));
-    		}
-    	}
-    	*/
     	y = y+vy;
     	if(y>=980) {
     		vy = -vymin+(int)(Math.random()*(-vymax+vymin));
@@ -184,21 +143,6 @@ public class Fish {
     	//respawn - if falling from the sky respawn at the bottom
     	
     	//Code for when fish falls
-    	
-    	/*ORIGINAL!!!!!
-    	if(vx==0 && vy==20 && y>=900) {
-    		vx = (int)(Math.random()*(8)+3);
-    			
-    		//50% of time, vx is negative
-    		if(Math.random()<0.5) {
-    				vx*=-1;
-    		}
-    		
-    		vy = -(int)(Math.random()*8+3);
-    			
-    		img = normal;
-    		}
-    		*/
     	
     	if(vx==0 && vy==20 && y>=900) {
     		vx = (int)(Math.random()*(2)+1);
@@ -220,7 +164,7 @@ public class Fish {
 	}
     
     
-    // Draws the duck on the screen
+    // Draws the fish on the screen
     public void paint(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;   // Graphics2D lets us draw images
         tx.scale(1, 1); //original up or down scale
@@ -234,8 +178,6 @@ public class Fish {
         }
         g2.drawImage(img, tx, null);      // Actually draw the duck image
         
-        //tokage2.paint(g);
-        
         update();
         init(x,y);
         
@@ -244,20 +186,18 @@ public class Fish {
         g.setColor(hitBlue);
         g.fillRect(1270, 60, 110, 40);
         
-        //create a green hitbox
-        g.setColor(Color.red);
-        g.drawOval((int)x+35, (int)y-25, 160, 160);
-        
         //create levels boxes
         //level 1
         Color level1 = new Color(240,237,201);
         g.setColor(level1);
         g.fillRect(0, 0, 100, 100);
         
+        
         //level 2
         Color level2 = new Color(200, 224, 197);
         g.setColor(level2);
         g.fillRect(100, 0, 100, 100);
+        
         
         //level 3
         Color level3 = new Color(94, 159, 171);
@@ -302,8 +242,7 @@ public class Fish {
     }
     
    
-    //Collision and collision logic
-    
+    //Check if levels are changed and return which level was selected
     public int checkLevels(int mX, int mY) {
     	Rectangle mouse = new Rectangle (mX, mY, 50,50);
     	
@@ -324,6 +263,7 @@ public class Fish {
     	}
     }
     
+   //Check for collision 
     public boolean checkCollision(int mX, int mY) {
     	//represent mouse as rectangle
     	Rectangle mouse = new Rectangle(mX, mY, 150, 150);
@@ -340,6 +280,7 @@ public class Fish {
     	}
     }
     
+    //Check for misclicks
     public int checkmissedCatches(int mX, int mY) {
     	//represent mouse as rectangle
     	Rectangle mouse = new Rectangle(mX, mY, 150, 150);
@@ -348,11 +289,6 @@ public class Fish {
     	Rectangle fishRect = new Rectangle((int)x,(int)y,250,109);
     	
     	//use this built-in method for Rectangle to check if they intersect
-    	//aka Collision
-    	/*if(mouse.intersects(fishRect)) {
-    		return missedCatches;
-    	}
-    	*/
     	if(!mouse.intersects(fishRect)&&checkLevels(mX,mY)==0) {
     		missedCatches = missedCatches+1;
     		return missedCatches;
@@ -361,6 +297,7 @@ public class Fish {
     	}
     }
     
+//Check for collisions
     public int checkNumberCollision(int mX, int mY) {
     	
     	//represent mouse as rectangle
@@ -371,6 +308,7 @@ public class Fish {
     	
     	//use this built-in method for Rectangle to check if they intersect
     	//aka Collision
+
     	if(mouse.intersects(fishRect)) {
     		//logic if colliding
     		
@@ -381,16 +319,16 @@ public class Fish {
     		//change sprite to the alternate skin
     		img = dead;//fish is dead
     		
-    		newTokage2.setLocation(x, 300);
-    		newTokage2.setVelocityVariables(0, -3);
+    		//Tokage will pop up while licking fish
+    		newTokage2.setLocation(x, 700);
+    		newTokage2.setVelocityVariables(0, 5);
     		
     		score = score+1;
     		return score;
     	}else {
     		return score;
     	}
-    	//ORIGINALLY had an else return -1;
-    }
-    
+    	
+    }  
     
 }
