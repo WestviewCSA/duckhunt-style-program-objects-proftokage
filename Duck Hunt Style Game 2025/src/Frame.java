@@ -32,33 +32,6 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	public int missedCatches;
 	public boolean checkCollision;
 	
-	/**
-	 * Declare and instantiate (create) your objects here
-	 */
-	private Fish fishObject = new Fish();
-	
-	private Background myBackground= new Background();
-	private MyCursor cursor = new MyCursor();
-	private Foreground myForeground = new Foreground();
-	private Scoretables myScoretables = new Scoretables();
-	
-	//Fish scores printed
-	private FishScore myFishScore1 = new FishScore(1570,85,0.7,0.7);
-	private FishScore myFishScore2 = new FishScore(1605,85,0.7,0.7);
-	private FishScore myFishScore3 = new FishScore(1640,85,0.7,0.7);
-	private FishScore myFishScore4 = new FishScore(1675,85,0.7,0.7);
-	private FishScore myFishScore5 = new FishScore(1710,85,0.7,0.7);
-	private FishScore myFishScore6 = new FishScore(1745,85,0.7,0.7);
-	private FishScore myFishScore7 = new FishScore(1780,85,0.7,0.7);
-	private FishScore myFishScore8 = new FishScore(1815,85,0.7,0.7);
-	
-	//Win and lose
-	private Win myWin = new Win();
-	
-	//Fill missed catches box
-	private MissedCatches myMissedCatches1 = new MissedCatches(1275,65,0.5,0.5);
-	private MissedCatches myMissedCatches2 = new MissedCatches(1305,65,0.5,0.5);
-	private MissedCatches myMissedCatches3 = new MissedCatches(1335,65,0.5,0.5);
 	
 	@Override
 	public void mouseClicked(MouseEvent mouse) {
@@ -70,7 +43,6 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	public void mouseEntered(MouseEvent mouse) {
 	    // Runs when the mouse enters the area of a component (like a button).
 	    // Example: You could highlight the button when the mouse hovers over it.
-		//playSound("Typical_music.wav");
 	}
 
 	@Override
@@ -112,7 +84,9 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		
 		if(myWin.checkPlayAgain(mouse.getX()-25,mouse.getY()-50)==true) {
 			fishObject.setScore(0);
+			checkCollisionNumber = 0;
 			fishObject.setMissedCatches(0);
+			missedCatches = 0;
 		}
 	}
 
@@ -170,14 +144,14 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			Font f3 = new Font("Times New Roman", Font.PLAIN, 40);
 			pen.setFont(f3);
 			pen.setColor(Color.WHITE);
-			pen.drawString("If you want to play again, please click this win panel twice",500,250);
+			pen.drawString("If you want to play again, please click this win panel a few times",500,250);
 			}
-		
+		/*
 			if(checkCollisionNumber==9){
 			fishObject.setScore(0);
 			
 			}
-			
+			*/
 		//call paint for the object
 		//for objects, you call methods on them using the dot operator
 		//methods use always involve parenthesis
@@ -200,13 +174,13 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			Font f4 = new Font("Times New Roman", Font.PLAIN, 40);
 			pen.setFont(f4);
 			pen.setColor(Color.WHITE);
-			pen.drawString("If you want to play again, please click this lose panel twice",500,250);
+			pen.drawString("If you want to play again, please click this lose panel a few times",500,250);
 		}
-		
+		/*
 		if(missedCatches==4) {
 			fishObject.setMissedCatches(0);
 		}
-		
+		*/
 		//Add labels for level boxes
 		Font f = new Font("Segoe UI", Font.PLAIN, 20);
 		pen.setFont(f);
@@ -231,6 +205,35 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		myForeground.paint(pen);
 		
 	}
+	
+	/**
+	 * Declare and instantiate (create) your objects here
+	 */
+	private Fish fishObject = new Fish();
+	
+	private Background myBackground= new Background();
+	private MyCursor cursor = new MyCursor();
+	private Foreground myForeground = new Foreground();
+	private Scoretables myScoretables = new Scoretables();
+	
+	//Fish scores printed
+	private FishScore myFishScore1 = new FishScore(1570,85,0.7,0.7);
+	private FishScore myFishScore2 = new FishScore(1605,85,0.7,0.7);
+	private FishScore myFishScore3 = new FishScore(1640,85,0.7,0.7);
+	private FishScore myFishScore4 = new FishScore(1675,85,0.7,0.7);
+	private FishScore myFishScore5 = new FishScore(1710,85,0.7,0.7);
+	private FishScore myFishScore6 = new FishScore(1745,85,0.7,0.7);
+	private FishScore myFishScore7 = new FishScore(1780,85,0.7,0.7);
+	private FishScore myFishScore8 = new FishScore(1815,85,0.7,0.7);
+	
+	//Win and lose
+	private Win myWin = new Win();
+	
+	//Fill missed catches box
+	private MissedCatches myMissedCatches1 = new MissedCatches(1275,65,0.5,0.5);
+	private MissedCatches myMissedCatches2 = new MissedCatches(1305,65,0.5,0.5);
+	private MissedCatches myMissedCatches3 = new MissedCatches(1335,65,0.5,0.5);
+	
 	
 	@Override
 	public void mouseReleased(MouseEvent mouse) {
