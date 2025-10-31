@@ -60,10 +60,10 @@ public class Fish {
         vy = 0;
         
         //Define the max and min velocities
-        vxmin = 5; 
-        vxmax = 10; 
-        vymin = 5;
-        vymax = 10;
+        vxmin = 15; 
+        vxmax = 20; 
+        vymin = 15;
+        vymax = 20;
         
         //initialize the vx and vy variables with non-zero values
         vx  = vxmin + (int)(Math.random()*(vxmax-vxmin));

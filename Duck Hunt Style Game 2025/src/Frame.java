@@ -63,6 +63,10 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		checkCollisionNumber = fishObject.checkNumberCollision(mouse.getX()-25,mouse.getY()-50);
 		missedCatches = fishObject.checkmissedCatches(mouse.getX()-25, mouse.getY()-50);
 		
+		if(checkCollision==true) {
+			mouseClickSound.play();
+		}
+		
 		//If one of the level boxes is clicked, the fish's velocity changes accordingly
 		int level = fishObject.checkLevels(mouse.getX()-25,mouse.getY()-50);
 		
@@ -70,15 +74,15 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			fishObject.setVelocityVariables(5, 10, 5, 10);
 			
 		}else if(level==1) {
-			fishObject.setVelocityVariables(6, 11, 6, 11);
+			fishObject.setVelocityVariables(15, 25, 15, 25);
 			fishObject.changePicture("fish.gif");
 			
 		}else if (level==2) {
-			fishObject.setVelocityVariables(18, 20, 18, 20);
+			fishObject.setVelocityVariables(30, 40, 30, 40);
 			fishObject.changePicture("fish.gif");
 			
 		}else if (level ==3) {
-			fishObject.setVelocityVariables(28, 30, 28, 30);
+			fishObject.setVelocityVariables(45, 50, 45, 50);
 			fishObject.changePicture("fish.gif");
 		}
 		
